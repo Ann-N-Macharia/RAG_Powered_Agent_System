@@ -1,0 +1,505 @@
+# AfyaShield Medical Insurance Provider Manual
+## Version 2026.1
+
+## Overview
+
+AfyaShield Health Insurance is a private medical insurance provider operating in Kenya. 
+This document defines insurance plans, eligibility rules, benefit coverage, clinical routing procedures, provider networks, exclusions, and compliance requirements.
+
+This manual is intended for authorized insurance verification agents, healthcare providers, and customer service systems.
+
+The AI insurance verification assistant must only provide information contained within this document and must not make clinical decisions or guarantee claim approval.
+
+---
+
+# 1. Plan Definitions and Member Eligibility
+
+## 1.1 Active Insurance Plans
+
+AfyaShield provides the following medical insurance plans:
+
+| Plan Name | Target Members | Network Level |
+|---|---|---|
+| Corporate Plus Plan | Employer-sponsored employees and dependents | Tier 1 Network |
+| Standard Health Plan | Individual members and SMEs | Tier 2 Network |
+| Premium Executive Plan | High-income individuals and corporate executives | Tier 1 + Specialist Network |
+
+---
+
+# 1.2 Membership Eligibility Requirements
+
+A member must have an active AfyaShield policy before receiving covered healthcare services.
+
+Eligibility verification requires:
+
+- Policy Number
+- Member Identification Number
+- National Identification Number (Kenya National ID)
+- Passport number for foreign residents
+- Employer Code (for corporate members)
+
+Note:
+
+Personal identifiers are processed through the organization's PII masking and verification middleware before reaching the AI assistant.
+
+The AI assistant must never request or display full personal identifiers.
+
+---
+
+# 1.3 Membership Status Definitions
+
+## Active Membership
+
+A member is considered active when:
+
+- Premium payments are up to date
+- Policy validity period has not expired
+- No suspension has been applied
+
+Active members may access eligible healthcare services according to their plan benefits.
+
+---
+
+## Suspended Membership
+
+A policy is suspended when:
+
+- Premium payments are overdue
+- Employer contributions have not been received
+- Required documentation has not been updated
+
+Suspended members should be informed:
+
+"Your membership requires verification before covered services can be confirmed."
+
+The agent must not approve treatment during suspension.
+
+---
+
+## Lapsed Membership
+
+A policy is considered lapsed when:
+
+- Coverage expiry date has passed
+- Premium payment has not been received within the allowed grace period
+
+Lapsed members must renew coverage before accessing insurance benefits.
+
+---
+
+# 2. Benefit Schedules (Covered Services)
+
+## 2.1 Outpatient Benefits
+
+Outpatient services covered include:
+
+- General practitioner consultations
+- Specialist consultations after referral approval
+- Laboratory investigations
+- Prescription medication within approved formularies
+- Basic diagnostic imaging
+
+Annual outpatient limits:
+
+| Plan | Annual Limit |
+|-|-|
+| Corporate Plus | KES 250,000 |
+| Standard Health | KES 100,000 |
+| Premium Executive | KES 500,000 |
+
+---
+
+## 2.2 Outpatient Co-payments
+
+Members are responsible for the following co-payments:
+
+| Service | Member Contribution |
+|-|-|
+| GP Consultation | KES 500 per visit |
+| Specialist Consultation | KES 1,000 per visit |
+| Prescription Drugs | 10% co-payment |
+| Laboratory Tests | 10% co-payment |
+
+The provider should collect the member contribution before service completion.
+
+---
+
+# 2.3 Inpatient Benefits
+
+Covered inpatient services include:
+
+- Hospital admission
+- Surgery
+- Doctor fees
+- Theatre charges
+- Nursing services
+- Inpatient medication
+- Hospital accommodation
+
+Annual inpatient limits:
+
+| Plan | Annual Limit |
+|-|-|
+| Corporate Plus | KES 2,000,000 |
+| Standard Health | KES 750,000 |
+| Premium Executive | KES 5,000,000 |
+
+---
+
+# 2.4 Maternity Benefits
+
+Maternity benefits include:
+
+- Antenatal consultations
+- Normal delivery
+- Caesarean section delivery
+- Postnatal care
+
+Maternity limits:
+
+| Plan | Maximum Benefit |
+|-|-|
+| Corporate Plus | KES 150,000 |
+| Standard Health | KES 75,000 |
+| Premium Executive | KES 300,000 |
+
+Maternity requires completion of the maternity waiting period.
+
+---
+
+# 2.5 Chronic Disease Management
+
+Covered chronic conditions include:
+
+- Diabetes
+- Hypertension
+- Asthma
+- Chronic kidney disease
+- Cardiovascular diseases
+
+Coverage includes:
+
+- Regular monitoring consultations
+- Approved laboratory monitoring
+- Selected chronic medication
+
+Coverage requires enrollment into the AfyaShield Chronic Care Programme.
+
+---
+
+# 2.6 Specialized Diagnostic Procedures
+
+## Cardiac Ultrasound (Echocardiogram)
+
+Coverage:
+
+Cardiac ultrasound is covered when medically necessary.
+
+Requirements:
+
+- Request from a licensed medical practitioner
+- Clinical justification
+- Referral approval for Standard Health Plan members
+
+Coverage limits:
+
+| Plan | Coverage |
+|-|-|
+| Corporate Plus | Covered up to annual inpatient/outpatient limit |
+| Standard Health | Covered after specialist referral approval |
+| Premium Executive | Direct specialist access allowed |
+
+---
+
+## MRI and CT Scans
+
+MRI and CT scans require:
+
+- Medical justification
+- Specialist request
+- Prior authorization approval
+
+---
+
+# 3. Clinical Routing and Referral Protocols
+
+## 3.1 Referral Matrix
+
+| Service | Corporate Plus | Standard Health | Premium Executive |
+|-|-|-|-|
+| GP Visit | Direct Access | Direct Access | Direct Access |
+| Cardiologist | Referral Required | Referral Required | Direct Access |
+| Orthopedic Specialist | Referral Required | Referral Required | Direct Access |
+| Dermatologist | Referral Required | Referral Required | Direct Access |
+| Emergency Care | Direct Access | Direct Access | Direct Access |
+
+---
+
+# 3.2 Primary Care Physician (PCP) Referral Rules
+
+A PCP referral is required when:
+
+- The service involves specialist consultation
+- The procedure is high cost
+- The treatment requires clinical justification
+
+Examples:
+
+Requires referral:
+
+- Cardiology consultation
+- Oncology review
+- Orthopedic surgery assessment
+
+Does not require referral:
+
+- Emergency treatment
+- GP consultation
+- Basic laboratory testing
+
+---
+
+# 3.3 Pre-Authorization Requirements
+
+The following procedures require prior approval:
+
+## Surgical Procedures
+
+Examples:
+
+- Cardiac surgery
+- Joint replacement
+- Cancer surgery
+- Major abdominal surgery
+
+## Advanced Diagnostics
+
+Examples:
+
+- MRI scan
+- CT scan
+- PET scan
+- Cardiac catheterization
+
+## Long-Term Treatment
+
+Examples:
+
+- Dialysis
+- Chemotherapy
+- Radiotherapy
+
+---
+
+# 3.4 Triage Guidelines
+
+The insurance verification assistant may categorize urgency but must not diagnose.
+
+## Emergency Cases
+
+Examples:
+
+- Chest pain with difficulty breathing
+- Severe bleeding
+- Loss of consciousness
+- Stroke symptoms
+
+Action:
+
+Advise immediate emergency medical attention.
+
+---
+
+## Urgent Cases
+
+Examples:
+
+- Persistent high fever
+- Severe uncontrolled pain
+- Suspected infection requiring same-day review
+
+Action:
+
+Recommend medical review within 24 hours.
+
+---
+
+## Routine Cases
+
+Examples:
+
+- Medication refill questions
+- Benefit inquiries
+- Provider location requests
+
+Action:
+
+Provide insurance guidance.
+
+---
+
+# 4. Provider Network Directory
+
+## 4.1 Tier 1 Network Providers
+
+Tier 1 providers are available to Corporate Plus and Premium Executive members.
+
+Examples:
+
+| Facility | Location | Services |
+|-|-|-|
+| AfyaCare Hospital Nairobi | Nairobi CBD | General and specialist care |
+| Meridian Medical Centre | Westlands, Nairobi | Outpatient and diagnostics |
+| Lakeview Hospital | Kisumu | Inpatient and outpatient |
+
+---
+
+# 4.2 Tier 2 Network Providers
+
+Tier 2 providers are available mainly to Standard Health members.
+
+Examples:
+
+| Facility | Location | Services |
+|-|-|-|
+| Umoja Family Clinic | Umoja, Nairobi | Primary care |
+| Eastlands Medical Centre | Nairobi Eastlands | Outpatient services |
+| Nakuru Health Clinic | Nakuru | Primary care |
+
+---
+
+# 4.3 Pharmacy Network
+
+Approved pharmacies include:
+
+- AfyaShield Partner Pharmacy Nairobi CBD
+- AfyaShield Partner Pharmacy Westlands
+- AfyaShield Partner Pharmacy Kisumu
+
+Medication must be prescribed by an authorized healthcare provider.
+
+---
+
+# 5. Waiting Periods and Exclusions
+
+## 5.1 Benefit Waiting Periods
+
+| Benefit | Waiting Period |
+|-|-|
+| General outpatient care | Immediate after activation |
+| Major surgery | 90 days |
+| Maternity | 12 months |
+| Chronic disease programme | 30 days |
+| Specialized treatment | 90 days |
+
+---
+
+# 5.2 Excluded Services
+
+The following are not covered:
+
+## Cosmetic Procedures
+
+Examples:
+
+- Cosmetic surgery
+- Non-medical aesthetic procedures
+
+---
+
+## Experimental Treatments
+
+Excluded:
+
+- Unproven medical procedures
+- Experimental drugs
+- Non-approved therapies
+
+---
+
+## Lifestyle Procedures
+
+Excluded:
+
+- Weight loss surgery without medical indication
+- Fertility enhancement procedures
+- Voluntary health supplements
+
+---
+
+# 5.3 Pre-existing Conditions
+
+Pre-existing conditions are conditions diagnosed before policy activation.
+
+Coverage depends on:
+
+- Medical underwriting assessment
+- Policy terms
+- Waiting period completion
+
+The AI assistant must not confirm coverage without checking member policy details.
+
+---
+
+# 6. Regulatory and Compliance Context
+
+## 6.1 Data Privacy Policy
+
+AfyaShield complies with the Kenya Data Protection Act, 2019.
+
+Member information must:
+
+- Only be accessed for legitimate insurance verification purposes
+- Be protected from unauthorized disclosure
+- Not be stored in unsecured systems
+- Only be shared with authorized healthcare providers
+
+---
+
+# 6.2 AI Assistant Compliance Guardrails
+
+The insurance verification assistant must:
+
+## Allowed Responses
+
+Provide:
+
+- Benefit information
+- Provider network information
+- General eligibility rules
+- Required documentation
+
+---
+
+## Restricted Responses
+
+The assistant must not:
+
+- Diagnose medical conditions
+- Guarantee claim approval
+- Override underwriting decisions
+- Provide personal medical advice
+- Reveal masked personal information
+
+---
+
+## Required Disclaimer
+
+For clinical questions:
+
+"Coverage information is based on the current AfyaShield benefit guidelines. Final approval depends on clinical assessment, policy validity, and authorization requirements."
+
+---
+
+# 7. Knowledge Retrieval Guidelines
+
+Documents should be retrieved based on:
+
+- Member plan
+- Service category
+- Provider network
+- Authorization requirements
+- Coverage limits
+
+
+End of Document
