@@ -62,7 +62,7 @@ privacy_engine = DataPrivacyEngine()
 
 # =========================================================   
 #CODE TESTING:
-# ==========================================================
+# =========================================================
 if __name__=="__main__":
     # 1.masking
     message = "My name is Annie, my phone number is +254dfghjklkjhg"
