@@ -82,16 +82,7 @@ if __name__=="__main__":
 
     
     
-    # c_pyload = output_dict["compliant_payload"]
-    # print(c_pyload)
-    # pii_store = output_dict["secure_vault"]
-    # print(pii_store)
-
-
-    # 2.unmasking
-    # restored_payload = privacy_engine.demask_phone_number(c_pyload, pii_store)
-    # print(restored_payload)
-
+  
 
 
 
