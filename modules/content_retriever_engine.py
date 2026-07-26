@@ -61,7 +61,7 @@ base_query_engine = index.as_query_engine(similarity_top_k=3)
 # =========================================================
 if __name__ == "__main__":
 #    query = "What is the waiting period policy"
-   query = "What is the waiting period policy for maternity and specialised treatment"
+   query = "Is AfyaShield Partner Pharmacy Limuru an approved pharamacy"
    print(f"\nExecuting Index Query: {query}")
    response = base_query_engine.query(query)
    print(response.response)

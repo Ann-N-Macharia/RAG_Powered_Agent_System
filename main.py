@@ -45,53 +45,58 @@ llm = ChatOpenAI(model="gpt-4o-mini", temperature=0.0)
 # ===================================================================================
 # PROMPT SETUP
 # ===================================================================================
-prompt = ChatPromptTemplate.from_messages([
-    ("system", "You are an AfyaPlus verification assistant, "
-    "You can do math. input will be asking some math question provide answers with a touch of sarcasm"),
+myprompt = ChatPromptTemplate.from_messages([
+    ("system", "You are a helpful insurance knowledge assistant."
+    "Use the query_insurance_knowledge_base tool to answer questions about insurance."
+    "Always use the tool - don't guess or make up information."
+    "with every response provide an excerpt for to show what you are baing answer off of. I info is not available notify"
+    "user thet can reach out directly to the personnel on email 'info@afyashield.co.ke'"),
     ("human", "{input}"),
     ("placeholder", "{agent_scratchpad}")
 ])
 
+
 async def main():
-    try:
-        #Create the session
-        async with stdio_client(server_params) as (read, write):
-            async with ClientSession(read, write) as session:
-                await session.initialize()
+# try:
+    #Create the session
+    async with stdio_client(server_params) as (read, write):
+        async with ClientSession(read, write) as session:
+            await session.initialize()
 
-                #tool discovery
-                tools_list = await session.list_tools()
-                for tool in tools_list.tools:
-                    print(f"  - {tool.name}: {tool.description}")
+            #tool discovery
+            tools_list = await session.list_tools()
+            for tool in tools_list.tools:
+                print(f"  - {tool.name}: {tool.description}")
 
-                #tool call
-                mcp_tools = await load_mcp_tools(session)
-                local_tools = []
-                tools = local_tools+mcp_tools
+            #tool call
+            mcp_tools = await load_mcp_tools(session)
+            # local_tools = []
+            # tools = local_tools+mcp_tools
+            print(mcp_tools)
 
-                agent = create_agent(model=llm, tools=tools)
+            agent = create_agent(model=llm, tools=mcp_tools)
 
-                while True:
+            while True:
 
-                    user_input = input("> ")
+                user_input = input("> ")
 
-                    if user_input.lower() == "exit":
-                        break
+                if user_input.lower() == "exit":
+                    break
 
-                    compliant_object = privacy_engine.mask_phone_number(user_input)
+                compliant_object = privacy_engine.mask_phone_number(user_input)
 
-                    compliant_input = compliant_object["compliant_payload"]
-                    print(compliant_input)
-    
+                compliant_input = compliant_object["compliant_payload"]
+                type(print(compliant_input))
 
-                    response = await agent.ainvoke({
-                        "messages": prompt.format_messages(input = compliant_input)
-                    })
 
-                    print(response["messages"][-1].content)
+                response = agent.invoke({
+                    "messages": myprompt.format_messages(input = compliant_input)
+                })
 
-    except Exception as e:
-        print(f"Error: {e}")
+                print(response["messages"][-1].content)
+
+    # except Exception as e:
+        # print(f"Error: {e}")
       
 asyncio.run(main())
 
