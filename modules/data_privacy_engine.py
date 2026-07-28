@@ -18,7 +18,7 @@ class DataPrivacyEngine:
     # METHODS
     #====================
     # 1.mask_phone_number - Method to mask phone numbers
-    def mask_phone_number (self, input_text:str) -> dict:
+    def mask_pii (self, input_text:str) -> dict:
         #creates a dictionary to store the pii with the values used for masking
         pii_store = {}
         message_payload = input_text
@@ -61,7 +61,7 @@ class DataPrivacyEngine:
     
     
     # 2.demask_phone_number - Method to mask phone numbers
-    def demask_phone_number (self, input_text:str, pii_store:dict) -> str:
+    def demask_pii (self, input_text:str, pii_store:dict) -> str:
         message_payload = input_text
         #loop through the pii store, 
 
@@ -71,13 +71,15 @@ class DataPrivacyEngine:
         
         return demasked_message_payload
     
-privacy_engine = DataPrivacyEngine()
+
 
 
 # =========================================================   
 #CODE TESTING:
 # =========================================================
 if __name__=="__main__":
+    privacy_engine = DataPrivacyEngine()
+
     # 1.masking
     message = "My name is Annie, my phone number is +254721950675 and email is am@gmail.com"
     output_dict = privacy_engine.mask_phone_number(message)

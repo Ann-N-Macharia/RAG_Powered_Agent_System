@@ -13,6 +13,7 @@ from mcp import ClientSession, StdioServerParameters
 from mcp.client.stdio import stdio_client
 from langchain_core.prompts import ChatPromptTemplate
 from langgraph.checkpoint.memory import InMemorySaver
+from modules.data_privacy_engine import DataPrivacyEngine
 
 # ===================================================================================
 # LOAD ENV VARIABLES AND INITILIAZE OPENAI CLIENT
@@ -120,11 +121,15 @@ async def main():
 
             print("\nAgent ready! Ask about insurance (type 'exit' to quit)\n")
 
+            privacy_engine=DataPrivacyEngine()
+
             while True:
                 user_input = input("You: ")
-
                 if user_input.lower() == "exit":
                     break
+
+                #PII Masking
+                user_input = privacy_engine.mask_pii(user_input)
 
                 # Invoke agent - checkpointer + config makes this stateful across turns
                 response = await agent.ainvoke(
@@ -132,6 +137,8 @@ async def main():
                     config=config
                 )
 
+                #PII restoration
+                response = privacy_engine.demask_pii(response)
 
                 # Extract the response
                 if "messages" in response:
